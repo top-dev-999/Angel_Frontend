@@ -1,0 +1,7 @@
+<div class="toggle-holder" (click)="change($event)">
+  <div class="d-flex toggle" [@toggle]="value ? 'on' : 'off'">
+    <div class="option on">{{on}}</div>
+    <div class="center"></div>
+    <div class="option off">{{off}}</div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="container pfb mt-4">
+
+    <h3>Check In Information</h3>
+    <hr>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <td><b>Date</b></td>
+                <td>{{formatDate(checkIn.createdAt)}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Triggered By</b></td>
+                <td>{{getProfileName(checkIn.profileId)}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Device Name</b></td>
+                <td>{{checkIn.deviceName}}</td>
+            </tr>
+
+            <tr *ngIf="checkIn.deviceMobileNumber">
+                <td><b>Device Mobile Number</b></td>
+                <td>{{checkIn.deviceMobileNumber}}</td>
+            </tr>
+            <tr *ngIf="checkIn.deviceUnitId">
+                <td><b>Device's Unit ID</b></td>
+                <td>{{checkIn.deviceUnitId}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Message Sent</b></td>
+                <td class="wrap">{{checkIn.message}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Message Recipients</b></td>
+                <td>
+                    <div *ngFor="let recipient of getRecipients()">
+                        {{recipient.name + ' : ' + recipient.number}}
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="mt-2 mb-3">
+        <b>Location</b>
+
+        <agm-map style="height: 40vh;" [longitude]="checkIn.longitude" [latitude]="checkIn.latitude" [zoom]="15">
+            <agm-marker [longitude]="checkIn.longitude" [latitude]="checkIn.latitude"></agm-marker>
+        </agm-map>
+    </div>
+</div>

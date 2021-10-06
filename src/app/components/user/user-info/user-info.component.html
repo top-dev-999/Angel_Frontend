@@ -1,0 +1,69 @@
+<div class="background" [class.active]="shade">
+  <div class="container pt-4">
+
+    <h3>Alarm Info</h3>
+    <hr>
+
+    <form (submit)="onUpdateUserInfo()" class="form-horizontal">
+
+      <div class="form-buttons">
+        <input type="submit" class="btn btn-primary" value="Update Alarm Info">
+      </div>
+    </form>
+
+    <hr>
+    <br>
+    <div>
+      <h4>Image Upload</h4>
+      <div id="fileSelector">
+        <input style="display: none" type="file" name="fileUpload" id="fileUpload" #fileInput accept=".jpg, .png"
+          multiple ng2FileSelect [uploader]="uploader">
+        <button class="btn btn-primary" (click)="fileInput.click()">Upload Files</button>
+      </div>
+
+      <div class="file-list">
+        <div class="row uploadList" *ngFor="let item of uploader.queue">
+          <div class="col-sm-4">
+            <div class="img-upload">
+              {{item.file.name}}
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="progress img-upload">
+              <div class="progress-bar bg-success" [ngStyle]="{'width':item.progress+'%'}"></div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-primary" (click)="item.upload()">Upload</button>
+            <button type="button" class="btn btn-danger" (click)="item.remove()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div>
+      <h4>Uploaded Images:</h4>
+      <div class="image-grid">
+        <div *ngFor="let image of images">
+          <div class="image">
+            <img class="unopened-img" [src]="image.imageString">
+            <button *ngIf="!image.active" class="btn btn-primary button" (click)="onImageClicked(image)">View</button>
+            <button *ngIf="!image.active" class="btn btn-danger button" (click)="openDeleteImageModal(image)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div *ngIf="shade" class="image-active">
+  <div class="close" (click)="closeAll()">
+    <i class="fa fa-close"></i>
+  </div>
+  <img class="opened-img" [src]="selectedImage.imageString">
+  <i class="fa fa-angle-right next-img" (click)="scrollToNextImage()"></i>
+  <i class="fa fa-angle-left prev-img" (click)="scrollToPrevImage()"></i>
+</div>

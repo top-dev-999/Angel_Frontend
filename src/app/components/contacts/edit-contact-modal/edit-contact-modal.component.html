@@ -1,0 +1,56 @@
+<div class="modal-header" style="background-color:#ff8a4f">
+    <h4 class="modal-title text-white pull-left">Edit Contact</h4>
+    <button type="button" class="close pull-right text-white" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <form class="form-horizontal" #form="ngForm" (submit)="onContactSubmit()">
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Name</label>
+            <div class="col-md-9">
+                <input required [(ngModel)]="contact.name" type="text" name="name" #name="ngModel" class="form-control">
+                <div class="text-danger sm" [hidden]="name.valid || name.pristine">Name is required</div>
+            </div>
+        </div>
+
+        <div class="form-group row create-profile-tel-input">
+            <label class="col-md-3 col-form-label">Number</label>
+            <div class="col-md-9">
+                <intl-tel-input #telInput [name]="'number'" [cssClass]="'form-control'"
+                    [options]="{ preferredCountries: ['us'], autoPlaceholder: 'off' }" [onlyLocalized]="false"
+                    [required]="'required'" [(E164PhoneNumber)]="contact.number">
+                </intl-tel-input>
+            </div>
+        </div>
+        <!--
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Email</label>
+            <div class="col-md-9">
+                <input [(ngModel)]="contact.email" type="email" name="email" #email="ngModel" class="form-control">
+                <div class="text-danger sm" [hidden]="email.valid || email.pristine">Email is required</div>
+            </div>
+        </div>
+-->
+        <alert type="danger" *ngIf="error">
+            <strong>{{error}}</strong>
+        </alert>
+
+    </form>
+</div>
+
+<div class="modal-footer d-flex justify-content-between">
+
+    <div>
+        <button *ngIf="!loading" class="btn btn-danger" (click)="onDeleteContact()">Delete Contact</button>
+    </div>
+
+    <div>
+        <button *ngIf="!loading" class="btn btn-primary" (click)="onContactSubmit()"
+            [disabled]="form.invalid && (contact.number || contact.email)">Save</button>
+        <button *ngIf="loading" class="btn btn-primary" disabled="disabled">Loading...</button>
+        <button class="btn btn-default" (click)="close()">Cancel</button>
+    </div>
+</div>

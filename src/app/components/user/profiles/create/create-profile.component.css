@@ -1,0 +1,129 @@
+.container {
+    margin-top: 2rem;
+}
+
+.multi-step-form {
+    margin-bottom: 20px;
+    padding: 3rem;
+    background-color: #f1f1f1;
+}
+
+.icon {
+    width: 100%;
+    object-fit: contain;
+}
+
+.icon-holder {
+    max-width: 200px;
+    cursor: pointer;
+    background-color: #ff8a4f77;
+}
+
+.icon-holder.selected {
+    background-color: #ff8a4f;
+}
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.step.active {
+    background-color: #ff8a4f;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.image-container {
+    flex-wrap: wrap;
+}
+
+.image {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 1px solid;
+    margin: 0.5rem;
+    cursor: pointer;
+}
+
+.add-image {
+    font-size: 70px;
+    line-height: 196px;
+    border-style: dashed;
+    border-width: 2px;
+    text-align: center;
+}
+
+.add-image:hover {
+    background-color: #ff8a4f77;
+}
+
+.image-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 30px;
+    text-align: center;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+}
+.image-close-button:hover {
+    background-color: lightgray;
+}
+
+.img-upload {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media only screen and (max-width: 768px) {
+    .multi-step-form {
+        padding: 1rem;
+    }
+}
+
+
+
+.shade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000088;
+    width: 100%;
+    height: 100vh;
+    z-index: 1020;
+}
+
+.ex-image-container {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+}
+
+.ex-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ex-image-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: white;
+    font-size: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}

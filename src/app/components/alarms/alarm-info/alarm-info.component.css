@@ -1,0 +1,96 @@
+.wrap {
+    white-space: normal;
+}
+
+td {
+    border: none;
+}
+
+.background {
+    opacity: 1;
+}
+
+.background.active {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0.5;
+    background: gray;
+}
+
+.table-grid {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-row-gap: 20px;
+}
+
+.image-container {
+    flex-wrap: wrap;
+}
+
+.image {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 1px solid;
+    margin: 0.5rem;
+    cursor: pointer;
+}
+
+.img-upload {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media only screen and (max-width: 768px) {
+    .table-grid{
+        display: block;
+    }
+
+    .sm-mt {
+        margin-top: 15px;
+    }
+}
+
+
+
+
+/* 
+ for the image view
+*/
+.shade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000088;
+    width: 100%;
+    height: 100vh;
+    z-index: 1020;
+}
+
+.ex-image-container {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+}
+
+.ex-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ex-image-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: white;
+    font-size: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}

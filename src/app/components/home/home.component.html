@@ -1,0 +1,199 @@
+<div class="card card-container">
+    <h5 class="card-header">Profiles</h5>
+    <div class="card-body">
+
+        <div class="spinner-container" *ngIf="profileLoading">
+            <div class="loader center"></div>
+        </div>
+        <div class="display-grid justify-content-center" *ngIf="!profileLoading">
+
+            <div class="item-container primary-hover" *ngFor="let profile of profiles"
+                (click)="navToEditProfile(profile.id)">
+
+                <div class="profile-name">{{profile.name + ' ' + profile.surname}}</div>
+
+            </div>
+
+            <div class="item-container item-add-container" (click)="navToCreateProfile()">
+                <div class="add-icon-container">
+                    <i class="fa fa-plus"></i>
+                </div>
+                <div class="hover-text">
+                    Add Profile
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="card card-container">
+    <h5 class="card-header">Devices</h5>
+    <div class="card-body">
+
+        <div class="spinner-container" *ngIf="deviceLoading">
+            <div class="loader center"></div>
+        </div>
+        <div class="display-grid justify-content-center" *ngIf="!deviceLoading">
+
+            <div class="item-container primary-hover" *ngFor="let device of devices" (click)="navToEditDevice(device)">
+                <img class="device-img" [src]="getProductImage(device.productId)">
+                <div class="device-text">
+                    {{device.name||'Setup Device'}}
+                </div>
+                <div class="armed-toggle">
+                    <app-toggle [on]="'Armed'" [off]="'Disarmed'" [value]="!device.state || device.state == 'armed'"
+                        (onChange)="onArmedChange($event, device)"></app-toggle>
+                </div>
+            </div>
+
+            <div class="item-container item-add-container" (click)="navToCreateDevice()">
+                <div class="add-icon-container">
+                    <i class="fa fa-plus"></i>
+                </div>
+                <div class="hover-text">
+                    Add Device
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="card card-container">
+    <div class="card-header d-flex justify-content-between">
+        <h5 class="contacts-heading">Contacts</h5>
+        <div class="btn btn-primary btn-sm" (click)="openAddContactModal()">Add Contact</div>
+    </div>
+
+    <div class="card-body">
+
+        <div class="spinner-container" *ngIf="contactsLoading">
+            <div class="loader center"></div>
+        </div>
+        <div class="display-grid justify-content-center" *ngIf="!contactsLoading">
+
+            <div class="table-responsive mt-3 mb-3">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let contact of contacts" (click)="openEditContactModal(contact)" class="pointer">
+
+                            <td>{{contact.name}}</td>
+                            <td>{{contact.number}}</td>
+                        </tr>
+                        <tr *ngIf="contacts.length == 0">
+                            <td colspan="3">No Contacts</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card card-container">
+    <h5 class="card-header">Alarm History</h5>
+    <div class="card-body">
+
+        <div class="spinner-container" *ngIf="alarmLoading">
+            <div class="loader center"></div>
+        </div>
+        <div class="table-responsive mt-3 mb-3">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Device</th>
+                        <th>Triggered By</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let alarm of alarms" (click)="navToViewAlarm(alarm.id)" class="pointer">
+                        <td class="p-0"><img class="device-type-img ml-3" [src]="getProductImage(alarm.productId)" />
+                        </td>
+                        <td>{{alarm.deviceName}}</td>
+                        <td>{{getProfileName(alarm.profileId)}}</td>
+                        <td>{{formatDate(alarm.createdAt)}}</td>
+                    </tr>
+                    <tr *ngIf="alarms.length == 0">
+                        <td colspan="4">No alarms</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div class="pfb">
+    <div class="card card-container">
+        <h5 class="card-header">Check In History</h5>
+        <div class="card-body">
+
+            <div class="spinner-container" *ngIf="checkInLoading">
+                <div class="loader center"></div>
+            </div>
+            <div class="table-responsive mt-3 mb-3">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Device</th>
+                            <th>Triggered By</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let checkIn of checkIns" (click)="navToCheckIn(checkIn.id)" class="pointer">
+                            <td class="p-0"><img class="device-type-img ml-3"
+                                    [src]="getProductImage(checkIn.productId)" /></td>
+                            <td>{{checkIn.deviceName}}</td>
+                            <td>{{getProfileName(checkIn.profileId)}}</td>
+                            <td>{{formatDate(checkIn.createdAt)}}</td>
+                        </tr>
+                        <tr *ngIf="checkIns.length == 0">
+                            <td colspan="4">No Check Ins</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #stateConfirmModal>
+    <div class="modal-header">
+        <h4 class="modal-title">Are you sure?</h4>
+        <button type="button" class="close text-white pull-right" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <p>Are you sure you want to {{stateToUpdate}} your {{deviceToUpdate.name}}?</p>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="updateDeviceState()">Yes</button>
+        <button type="button" class="btn btn-default" (click)="close()">No</button>
+    </div>
+</ng-template>

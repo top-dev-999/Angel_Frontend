@@ -1,0 +1,13 @@
+.alert-holder {
+    /*width: 90%;*/
+    position: fixed;
+    z-index: 1051;
+    top: 77px;
+    right: 10px;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.close-button {
+    margin-left: 15px;
+}

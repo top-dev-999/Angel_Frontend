@@ -1,0 +1,96 @@
+<div>
+    Authenticate
+    <div class="auth">
+        <div class="card">
+            <div class="card-header">New Users</div>
+            <div class="card-body">
+                <form (submit)="onRegisterSubmit()" #newForm="ngForm">
+
+                    <div class="form-group">
+                        <input required type="email" [(ngModel)]="newAccount.email" name="email" placeholder="Email.."
+                            class="form-control form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <input required type="password" [(ngModel)]="newAccount.password" name="password"
+                            placeholder="Password.." class="form-control form-input">
+                    </div>
+
+                    <div class="d-flex mb-3">
+
+                        <input class="mt-1" type="checkbox" [(ngModel)]="newAccount.terms" name="terms">
+                        <div class="ml-2">I accept <a routerLink="/terms-and-conditions" target="_blank">Terms &
+                                Conditions</a></div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary form-control"
+                        [disabled]="newForm.invalid || !newAccount.terms">Create new account</button>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Existing Users</div>
+            <div class="card-body">
+
+                <div *ngIf="isAuthenticated()">
+                    <button (click)="continueAsCurrentUser()" class="btn btn-primary form-control">
+                        Continue as {{currentAccount.email}}
+                    </button>
+                    <button (click)="logout()" class="btn btn-primary form-control mt-4">
+                        Logout
+                    </button>
+                </div>
+
+                <div *ngIf="!isAuthenticated()">
+                    <form (submit)="onLoginSubmit()" #existForm="ngForm">
+
+                        <div class="form-group">
+                            <input required type="email" [(ngModel)]="existingAccount.email" name="email"
+                                placeholder="Email.." class="form-control form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <input required type="password" [(ngModel)]="existingAccount.password" name="password"
+                                placeholder="Password.." class="form-control form-input">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-control"
+                            [disabled]="existForm.invalid">Login</button>
+                    </form>
+
+                    <small class="pointer" (click)="showModal(forgotPasswordModal)">Forgot Password?</small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<ng-template #forgotPasswordModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Forgot Password</h4>
+        <button type="button" class="close" aria-label="Close" (click)="hideModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #forgotForm="ngForm">
+            <div class="form-group">
+                <label for="email">Please enter the email address you signed up with</label>
+                <div class="input-group">
+                    <input required class="form-control" [(ngModel)]="forgotEmail" name="email">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="forgotForm.invalid" (click)="forgotPassword()">Email
+            Password</button>
+    </div>
+</ng-template>

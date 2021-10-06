@@ -1,0 +1,31 @@
+<div>
+    Order Overview
+
+    <div class="table-responsive mt-3 mb-3">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Subscription</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let product of products">
+                    <td class="p-0">
+                        <img *ngIf="product.imagePath" class="ml-3 product-image" [src]="product.imagePath" />
+                    </td>
+                    <td>{{product.name}}</td>
+                    <td>R{{product.price}}</td>
+                    <td>R{{product.monthlyPrice ? product.monthlyPrice + ' per month' : product.yearlyPrice + ' per year' }}
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="btn btn-success" (click)="onPayNow()">Pay Now</div>
+</div>

@@ -1,0 +1,20 @@
+.contact-options {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px;
+    padding: 0px;
+}
+
+.contact-options {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}

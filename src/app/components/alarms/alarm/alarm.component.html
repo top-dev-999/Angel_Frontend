@@ -1,0 +1,140 @@
+<div class="container pfb mt-4">
+
+    <h3>Alarm Information</h3>
+    <hr>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <td><b>Date</b></td>
+                <td>{{formatDate(alarm.createdAt)}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Triggered By</b></td>
+                <td>{{getProfileName(alarm.profileId)}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Device Name</b></td>
+                <td>{{alarm.deviceName}}</td>
+            </tr>
+
+            <tr *ngIf="alarm.deviceMobileNumber">
+                <td><b>Device Mobile Number</b></td>
+                <td>{{alarm.deviceMobileNumber}}</td>
+            </tr>
+            <tr *ngIf="alarm.deviceUnitId">
+                <td><b>Device's Unit ID</b></td>
+                <td>{{alarm.deviceUnitId}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Message Sent</b></td>
+                <td class="wrap">{{alarm.message}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Message Recipients</b></td>
+                <td>
+                    <div *ngFor="let recipient of getRecipients()">
+                        {{recipient.name + ' : ' + recipient.number}}
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="mt-2">
+        <b>Location</b>
+
+        <agm-map style="height: 40vh;" [longitude]="alarm.longitude" [latitude]="alarm.latitude" [zoom]="15">
+            <agm-marker [longitude]="alarm.longitude" [latitude]="alarm.latitude"></agm-marker>
+        </agm-map>
+    </div>
+
+    <div class="mt-5" *ngIf="alarm.aura">
+
+        <div class="d-flex justify-content-between">
+            <h3>Aura Information</h3>
+            <div class="btn btn-primary" *ngIf="!alarm.aura.cancelledByCustomer" (click)="dismissAlarm()">Dismiss Alarm</div>
+        </div>
+        <hr>
+
+        <div class="table-responsive table-striped">
+            <table class="table">
+                <tr>
+                    <td><b>Status</b></td>
+                    <td>{{alarm.aura.status}}</td>
+                </tr>
+                <tr>
+                    <td><b>Cancelled By Customer</b></td>
+                    <td>{{alarm.aura.cancelledByCustomer}}</td>
+                </tr>
+                <tr>
+                    <td><b>Verified</b></td>
+                    <td>{{alarm.aura.verified}}</td>
+                </tr>
+                <tr>
+                    <td><b>Verified By</b></td>
+                    <td>{{alarm.aura.verifiedBy}}</td>
+                </tr>
+                <tr>
+                    <td><b>Verified At</b></td>
+                    <td>{{alarm.aura.verifiedAt}}</td>
+                </tr>
+                <tr>
+                    <td><b>Resolved At</b></td>
+                    <td>{{alarm.aura.resolvedAt}}</td>
+                </tr>
+                <tr>
+                    <td><b>Logged At</b></td>
+                    <td>{{alarm.aura.loggedAt}}</td>
+                </tr>
+                <tr>
+                    <td><b>Created At</b></td>
+                    <td>{{alarm.aura.createdAt}}</td>
+                </tr>
+                <tr>
+                    <td><b>Updated At</b></td>
+                    <td>{{alarm.aura.updatedAt}}</td>
+                </tr>
+                <tr>
+                    <td><b>Last Updated By</b></td>
+                    <td>{{alarm.aura.lastUpdatedBy}}</td>
+                </tr>
+                <tr>
+                    <td><b>Last Updated At</b></td>
+                    <td>{{alarm.aura.lastUpdatedAt}}</td>
+                </tr>
+                <tr>
+                    <td><b>Source</b></td>
+                    <td>{{alarm.aura.source}}</td>
+                </tr>
+                <tr>
+                    <td><b>Dispatch Required</b></td>
+                    <td>{{alarm.aura.dispatchRequired}}</td>
+                </tr>
+                <tr>
+                    <td><b>Acknowledged</b></td>
+                    <td>{{alarm.aura.acknowledged}}</td>
+                </tr>
+                <tr>
+                    <td><b>First Acknowledged By</b></td>
+                    <td>{{alarm.aura.firstAcknowledgedBy}}</td>
+                </tr>
+                <tr>
+                    <td><b>First Acknowledged At</b></td>
+                    <td>{{alarm.aura.firstAcknowledgedAt}}</td>
+                </tr>
+                <tr>
+                    <td><b>Owned</b></td>
+                    <td>{{alarm.aura.owned}}</td>
+                </tr>
+                <tr>
+                    <td><b>Owned By</b></td>
+                    <td>{{alarm.aura.ownedBy}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

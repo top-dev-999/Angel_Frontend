@@ -1,0 +1,84 @@
+<h4>WiFi:</h4>
+<p>
+  Please capture this WiFi credentials for the WiFi which your device will
+  communicate through.
+</p>
+<hr />
+
+<form (submit)="onWifiSubmit()" #form="ngForm">
+  <div class="form-group">
+    <label class="col-12 control-label">WiFi SSID/Name:</label>
+    <div class="col-12">
+      <input
+        required
+        class="form-control"
+        type="text"
+        [(ngModel)]="wifi.ssid"
+        name="ssid"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-12 control-label">WiFi Password:</label>
+    <div class="col-12">
+      <input
+        required
+        class="form-control"
+        type="password"
+        [(ngModel)]="wifi.password"
+        name="password"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-12 control-label">WiFi Location:</label>
+    <div class="form-group">
+      <div class="col-12">
+        <input
+          required
+          placeholder="search for location"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="off"
+          type="text"
+          class="form-control"
+          #search
+        />
+      </div>
+    </div>
+
+    <agm-map
+      style="height: 30vh;"
+      [longitude]="wifi.longitude"
+      [latitude]="wifi.latitude"
+      [zoom]="zoom"
+      [streetViewControl]="false"
+      (mapClick)="onMapMarkerSelected($event)"
+    >
+      <agm-marker
+        [longitude]="wifi.longitude"
+        [latitude]="wifi.latitude"
+      ></agm-marker>
+    </agm-map>
+  </div>
+
+  <div class="form-group" *ngIf="!wifi.new">
+    <div class="alert alert-success" *ngIf="wifi.isSynced">
+      Your WiFi has been programmed into your device
+    </div>
+    <div class="alert alert-danger" *ngIf="!wifi.isSynced">
+      Your WiFi has not been programmed into your device
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button
+      [disabled]="form.invalid || (!form.dirty && !wifi.dirty)"
+      class="btn btn-primary"
+    >
+      {{ wifi.new ? "Save" : "Update" }}
+    </button>
+  </div>
+</form>

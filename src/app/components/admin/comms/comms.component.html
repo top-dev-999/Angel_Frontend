@@ -1,0 +1,22 @@
+<div class="pfb">
+    <div id="flasher" [class]='flashClass'>New Communication Count: {{messageCount}}</div>
+    <ul id="messages">
+
+        <li *ngFor="let comm of comms">
+
+            <div>
+                <div *ngIf="comm.source">Source: {{comm.source}}</div>
+                <div *ngIf="comm.from">From: {{comm.from}}</div>
+                <div>Received:
+                    <pre [innerHTML]="syntaxHighlight(comm.received)"></pre>
+                </div>
+                <div *ngIf="comm.response">Response:
+                    <pre [innerHTML]="syntaxHighlight(comm.response)"></pre>
+                </div>
+                <div>Date: {{formatDate(comm.createdAt)}}</div>
+            </div>
+
+        </li>
+
+    </ul>
+</div>

@@ -1,0 +1,39 @@
+<div>
+    Which product would you like to buy?
+
+    <div class="d-md-flex flex-md-equal">
+        <div class="mx-auto d-md-flex flex-md-equal">
+
+            <div *ngFor="let product of products" class="m-3 text-center">
+                <div class="icon-holder mx-auto" [ngClass]="{'selected' : product.id == selectedProduct.id}"
+                    (click)="selectedProduct = product">
+                    <img class="icon" [src]="product.imagePath">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="d-flex">
+        <div class="card">
+            <div class="card-header">What you pay today</div>
+            <div class="card-body"><b>R{{selectedProduct.price}}</b></div>
+        </div>
+
+        <div *ngIf="selectedProduct.monthlyPrice" class="card ml-3">
+            <div class="card-header">What you pay per month</div>
+            <div class="card-body"><b>R{{selectedProduct.monthlyPrice}}</b></div>
+        </div>
+
+        <div *ngIf="selectedProduct.yearlyPrice" class="card ml-3">
+            <div class="card-header">What you pay per year</div>
+            <div class="card-body"><b>R{{selectedProduct.yearlyPrice}}</b></div>
+        </div>
+    </div>
+
+    <div style="overflow:auto; margin-top: 10px;">
+        <div style="float:right;">
+            <button class="btn btn-primary" (click)="onProceedClick()">Proceed</button>
+        </div>
+    </div>
+</div>

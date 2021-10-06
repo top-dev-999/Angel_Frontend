@@ -1,0 +1,71 @@
+<div class="container page-boarder pfb">
+
+
+    <h3 class="mt-3 mb-3">Orders</h3>
+
+
+    <h5>New Orders</h5>
+    <div class="table-responsive mt-3 mb-3">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>User Contact</th>
+                    <th>Products</th>
+                    <th>Delivery Status</th>
+                    <th>Payment Status</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let order of newOrders" (click)="navToOrder(order)" class="pointer">
+                    
+                    <td>{{getOrderName(order)}}</td>
+                    <td>
+                        <div>{{getOrderEmail(order)}}</div>
+                        <div>{{getOrderPhone(order)}}</div>
+                    </td>
+                    <td>{{order.products[0].name}}</td>
+                    <td>{{order.deliveryStatus}}</td>
+                    <td>{{order.paymentStatus}}</td>
+                </tr>
+                <tr *ngIf="newOrders.length == 0">
+                    <td colspan="5">No Orders</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <h5>Completed Orders</h5>
+    <div class="table-responsive mt-3 mb-3">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>User Contact</th>
+                    <th>Products</th>
+                    <th>Delivery Status</th>
+                    <th>Payment Status</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let order of oldOrders" (click)="navToOrder(order)" class="pointer">
+                    <td class="p-0">
+                        <img *ngIf="product.imagePath" class="ml-3 product-image" [src]="product.imagePath" />
+                    </td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.monthlyPrice}}</td>
+                    <td>{{product.yearlyPrice}}</td>
+                </tr>
+                <tr *ngIf="oldOrders.length == 0">
+                    <td colspan="5">No Orders</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,115 @@
+.background {
+    opacity: 1;
+}
+
+.background.active {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0.5;
+    background: gray;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.opened-img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    margin: auto;
+}
+
+.unopened-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.image {
+    text-align: center;
+    margin: 15px;
+    cursor: pointer;
+    height: 150px;
+}
+
+.comment-row{
+    margin-top:10px;
+    margin-bottom:10px;
+    padding: 5px;
+}
+
+.button {
+    display: none;
+}
+
+.btn-add-right{
+    position: absolute;
+    right: 0px;
+}
+
+.btn-del-right{
+    position: absolute;
+    right: 0px;
+    height: 25px;
+    padding: .01rem .75rem;
+}
+
+.image:hover {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.image:hover .button  {
+    position: relative;
+    bottom: 100px;
+    margin: 5px;
+    display: inline-block;
+}
+
+.image-active { 
+    height: 90vh;
+    width: 100%;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+}
+
+.prev-img {
+    position: absolute;
+    top: 40%;
+    left: 15px;
+    font-size: 75px;
+    cursor: pointer;
+}
+
+.next-img {
+    position: absolute;
+    top: 40%;
+    right: 15px;
+    font-size: 75px;
+    cursor: pointer;
+}
+
+.file-list {
+    margin: 25px;
+    text-align: center;
+}
+
+.img-upload {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    .image-grid {
+        display: block;
+    }
+}

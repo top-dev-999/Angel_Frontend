@@ -1,0 +1,112 @@
+<div class="container pfb mt-4">
+
+    <h3>Alarm Information</h3>
+    <hr>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <td><b>Date</b></td>
+                <td>{{formatDate(alarm.createdAt)}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Triggered By</b></td>
+                <td>{{getProfileName(alarm.profileId)}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Device Name</b></td>
+                <td>{{alarm.deviceName}}</td>
+            </tr>
+
+            <tr *ngIf="alarm.deviceMobileNumber">
+                <td><b>Device Mobile Number</b></td>
+                <td>{{alarm.deviceMobileNumber}}</td>
+            </tr>
+            <tr *ngIf="alarm.deviceUnitId">
+                <td><b>Device's Unit ID</b></td>
+                <td>{{alarm.deviceUnitId}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Message Sent</b></td>
+                <td class="wrap">{{alarm.message}}</td>
+            </tr>
+
+            <tr>
+                <td><b>Message Recipients</b></td>
+                <td>
+                    <div *ngFor="let recipient of getRecipients()">
+                        {{recipient.name + ' : ' + recipient.number}}
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="mt-2 mb-3">
+        <b>Location</b>
+
+        <agm-map style="height: 40vh;" [longitude]="alarm.longitude" [latitude]="alarm.latitude" [zoom]="15">
+            <agm-marker [longitude]="alarm.longitude" [latitude]="alarm.latitude"></agm-marker>
+        </agm-map>
+    </div>
+
+    <h3>User Information</h3>
+    <hr>
+    <div *ngIf="profile">
+
+        <div class="table-grid">
+
+            <div><b>Name</b></div>
+            <div>{{profile.name + ' ' + profile.surname}}</div>
+
+            <div class="sm-mt" *ngIf="profile.email"><b>Email Address</b></div>
+            <div *ngIf="profile.email">{{profile.email}}</div>
+
+            <div class="sm-mt" *ngIf="profile.cellPhone"><b>Cell Number</b></div>
+            <div *ngIf="profile.cellPhone">{{profile.cellPhone}}</div>
+
+            <div class="sm-mt" *ngIf="profile.idNumber"><b>ID Number</b></div>
+            <div *ngIf="profile.idNumber">{{profile.idNumber}}</div>
+
+            <div class="sm-mt" *ngIf="profile.allergies.length"><b>Allergies</b></div>
+            <div *ngFor="let allergy of profile.allergies">
+                <div [ngClass]="{'mt-1': i>0}">{{allergy}}</div>
+            </div>
+
+            <div class="sm-mt" *ngIf="profile.comments.length"><b>Comments from {{profile.name}}</b></div>
+            <div *ngFor="let comment of profile.comments">
+                <div [ngClass]="{'mt-1': i>0}">{{comment}}</div>
+            </div>
+        </div>
+
+
+        <div class="mt-5">
+            <h4>Images:</h4>
+
+            <div class="d-flex image-container justify-content-center mb-2">
+                <div class="image" *ngFor="let image of images" (click)="expandedImage = image.data">
+                    <img *ngIf="image.data" class="img-upload" [src]="image.data">
+                    <div *ngIf="!image.data" class="img-upload">Loading...</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger">
+        {{error}}
+    </div>
+</div>
+
+
+<div *ngIf="expandedImage" class="shade" (click)="expandedImage = null">
+    <div class="ex-image-container">
+        <div class="ex-image-close" (click)="expandedImage = null">
+            <i class="fa fa-close"></i>
+        </div>
+        <img [src]="expandedImage">
+    </div>
+</div>

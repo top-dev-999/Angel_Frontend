@@ -1,0 +1,40 @@
+<div class="card card-container">
+  <div class="card-header d-flex justify-content-between">
+      <h5 class="contacts-heading">Contacts</h5>
+      <div class="btn btn-primary btn-sm" (click)="openAddContactModal()">Add Contact</div>
+  </div>
+
+  <div class="card-body">
+
+      <div class="spinner-container" *ngIf="contactsLoading">
+          <div class="loader center"></div>
+      </div>
+      <div class="display-grid justify-content-center" *ngIf="!contactsLoading">
+
+          <div class="table-responsive mt-3 mb-3">
+              <table class="table table-hover">
+                  <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Phone Number</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                      <tr *ngFor="let contact of contacts" (click)="openEditContactModal(contact)" class="pointer">
+
+                          <td>{{contact.name}}</td>
+                          <td>{{contact.number}}</td>
+                      </tr>
+                      <tr *ngIf="contacts.length == 0">
+                          <td colspan="3">No Contacts</td>
+                      </tr>
+
+                  </tbody>
+              </table>
+          </div>
+
+      </div>
+
+  </div>
+</div>

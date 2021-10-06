@@ -1,0 +1,163 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.css";
+@import "~intl-tel-input/build/css/intlTelInput.css";
+
+.btn {
+    border-radius: 0px;
+}
+
+.btn-primary {
+    background-color: #ff8a4f;
+    border: solid 1px #5c7480;
+}
+
+.btn-primary:hover {
+    background-color: #5c7480;
+    border: solid 1px #5c7480;
+}
+
+.btn-primary:disabled {
+    color: #fff;
+    background-color: #ff8a4f77;
+    border-color: #5c748077;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 151, 165, .5);
+    box-shadow: 0 0 0 0.2rem rgba(120, 151, 165, .5);
+}
+
+.btn-primary:not(:disabled):not(.disabled).focus, .btn-primary:not(:disabled):not(.disabled):focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 151, 165, .5);
+    box-shadow: 0 0 0 0.2rem rgba(120, 151, 165, .5);
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #5c7480;
+    border: solid 1px #5c7480;
+}
+
+.hide {
+    display: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.table-responsive table th {
+    white-space: nowrap;
+}
+
+.table-responsive table td {
+    white-space: nowrap;
+}
+
+body {
+    color: #85868c;
+    position: relative;
+    margin: 0;
+    /* padding-bottom: 6rem; */
+    min-height: 100%;
+}
+
+h3 {
+    color: #7894a5;
+}
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.pfb {
+    padding-bottom: 3.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .pfb {
+        padding-bottom: 5rem;
+    }
+}
+
+
+/* panel styling */
+.panel-container {
+    display: grid;
+    grid-template-columns: 200px auto;
+    border: 1px solid;
+    border-radius: 4px;
+}
+
+.tab-options {
+    border-right: 1px solid;
+}
+
+.tab {
+    padding: 10px;
+    cursor: pointer;
+}
+.tab:hover {
+    background-color: #ff8a4f88;
+    color: white;
+}
+.tab.selected {
+    background-color: #ff8a4f;
+    color: white;
+}
+
+.panel {
+    padding: 1rem;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .panel-container {
+        display: block;
+    }
+    .tab-options {
+        display: flex;
+        flex-wrap: wrap;
+        border-bottom: 1px solid;
+        border-right: none;
+        justify-content: space-around;
+    }
+    .tab {
+        flex: auto;
+        text-align: center;
+    }
+}
+
+
+/* fade animation */
+.animate-opacity {
+    animation: opac 0.8s
+}
+
+@keyframes opac {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+.sm {
+    font-size: small;
+}
+
+
+.create-profile-tel-input .intl-tel-input {
+    display: block;
+}
+.edit-profile-tel-input .intl-tel-input {
+    display: block;
+}

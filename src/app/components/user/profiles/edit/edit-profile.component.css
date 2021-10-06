@@ -1,0 +1,101 @@
+.container {
+    padding-top: 15px;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.intl-tel-input {
+    width: 100%;
+}
+
+.tel-input{ 
+    display: block!important;
+}
+
+div{
+    display: block!important;
+}
+
+.image-container {
+    flex-wrap: wrap;
+}
+
+.image {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 1px solid;
+    margin: 0.5rem;
+    cursor: pointer;
+}
+
+.add-image {
+    font-size: 70px;
+    line-height: 196px;
+    border-style: dashed;
+    border-width: 2px;
+    text-align: center;
+}
+
+.add-image:hover {
+    background-color: #ff8a4f77;
+}
+
+.image-close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+}
+.image-close-button:hover {
+    background-color: lightgray;
+}
+
+.img-upload {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 
+ for the image view
+*/
+.shade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000088;
+    width: 100%;
+    height: 100vh;
+    z-index: 1020;
+}
+
+.ex-image-container {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+}
+
+.ex-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ex-image-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: white;
+    font-size: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}

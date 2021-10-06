@@ -1,0 +1,16 @@
+
+<div class="wrapper">
+    <div *ngIf="isAuthenticated()"></div>
+    <div class="sidebar" data-color="main-color">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="main-panel" [ngStyle]="mainWidth">
+        <app-navbar></app-navbar>
+        <div class="base-padding base-margin">
+            <app-alert></app-alert>
+            <router-outlet></router-outlet>
+        </div>
+        <app-loading></app-loading>
+        <app-footer></app-footer>
+    </div>
+</div>

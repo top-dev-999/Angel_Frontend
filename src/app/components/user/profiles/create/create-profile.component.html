@@ -1,0 +1,166 @@
+<div class="container pfb">
+
+    <form #form="ngForm" class="form-horizontal multi-step-form">
+
+        <h3>Add Profile:</h3>
+        <hr>
+        <!-- One "tab" for each step in the form: -->
+        <div *ngIf="index == 0">
+            <h4>Basic information:</h4>
+            <p>Please capture the fields you would like to share with your guardian angels when an alarm is triggered.
+            </p>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">First Name *</label>
+                <div class="col-12">
+                    <input class="form-control" type="text" [(ngModel)]="profile.name" name="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Last Name *</label>
+                <div class="col-12">
+                    <input class="form-control" type="text" [(ngModel)]="profile.surname" name="surname">
+                </div>
+            </div>
+
+            <div class="form-group create-profile-tel-input">
+                <label class="col-lg-3 control-label">Mobile Number *</label>
+                <div class="col-12">
+                    <intl-tel-input [name]="'cellPhone'" [required]="true" [cssClass]="'form-control'"
+                        [options]="{ preferredCountries: ['us'] }" [onlyLocalized]="false"
+                        [(E164PhoneNumber)]="profile.cellPhone" (keyup)="cellNumberChanged($event)">
+                    </intl-tel-input>
+                    <span class="text-danger" [hidden]="correctNumberFormat">Incorrect cell phone number
+                        formatting</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Email *</label>
+                <div class="col-12">
+                    <input class="form-control" type="email" [(ngModel)]="profile.email" name="email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-12 control-label">ID Number</label>
+                <div class="col-12">
+                    <input class="form-control" type="number" [(ngModel)]="profile.idNumber" name="idNumber">
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="index == 1">
+            <h4>Allergies:</h4>
+            <p>Please capture any allergies you may have.</p>
+
+            <div class="form-group">
+                <div class="col-12">
+
+                    <div class="d-flex mb-3">
+                        <input type="text" [(ngModel)]="allergy" name="allergy" class="form-control w100"
+                            placeholder="Enter allergy here" />
+                        <button class="btn btn-primary" pull-right type="text" (click)="addAllergy()">Add
+                            Allergy</button>
+                    </div>
+
+                    <table class="table">
+                        <tr *ngFor="let allergy of profile.allergies">
+                            <td>{{allergy}}</td>
+                            <td>
+                                <button class="btn btn-danger float-right"
+                                    (click)="removeAllergy(allergy)">Remove</button>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="profile.allergies.length == 0">
+                            <td>None</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="index == 2">
+            <h4>Comments:</h4>
+            <p>Any extra information you would like to share with your guardian angels, eg. family contact details,
+                disabilities etc.</p>
+
+            <div class="form-group">
+                <div class="col-12">
+
+                    <div class="d-flex mb-3">
+                        <input type="text" [(ngModel)]="comment" name="comment" class="form-control w100"
+                            placeholder="Enter comment here" />
+                        <button class="btn btn-primary" pull-right type="text" (click)="addComment()">Add
+                            Comment</button>
+                    </div>
+
+                    <table class="table">
+                        <tr *ngFor="let comment of profile.comments">
+                            <td>{{comment}}</td>
+                            <td>
+                                <button class="btn btn-danger float-right"
+                                    (click)="removeComment(comment)">Remove</button>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="profile.comments.length == 0">
+                            <td>None</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="index == 3">
+            <h4>Images:</h4>
+            <p>Upload images of your medical aid card, ID, drivers licence etc.</p>
+
+            <input style="display: none" type="file" #fileInput accept=".jpg, .png" ng2FileSelect [uploader]="uploader">
+
+            <div class="d-flex image-container justify-content-center mb-2">
+                <div class="image" *ngFor="let image of images" (click)="expandedImage = image.image">
+                    <img class="img-upload" [src]="image.image">
+                    <div class="image-close-button text-danger" (click)="removeImage(image)"><i class="fa fa-times"></i>
+                    </div>
+                </div>
+
+                <div class="image add-image" title="Add Image" (click)="fileInput.click()">
+                    <i class="fa fa-plus"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button *ngIf="!isLoading" type="button" class="btn btn-primary" [disabled]="index == 0"
+                    (click)="index = index-1">Previous</button>
+                <button *ngIf="!isLoading" type="button" class="btn btn-primary" [disabled]="!isStepValid()"
+                    (click)="onNextClick()">{{index
+                    == finalStep ? 'Submit' : 'Next'}}</button>
+
+                <button *ngIf="isLoading" disabled class="btn btn-primary">Loading...</button>
+            </div>
+        </div>
+
+        <!-- Circles which indicates the steps of the form: -->
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step" *ngFor="let number of numbers" [ngClass]="{'active' : index == number}"></span>
+        </div>
+
+    </form>
+
+</div>
+
+<div *ngIf="expandedImage" class="shade" (click)="expandedImage = null">
+    <div class="ex-image-container">
+        <div class="ex-image-close" (click)="expandedImage = null">
+            <i class="fa fa-close"></i>
+        </div>
+        <img [src]="expandedImage">
+    </div>
+</div>

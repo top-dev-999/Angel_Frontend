@@ -1,0 +1,68 @@
+
+.holder {
+    position: relative;
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    height: 100px;
+    background-color: #ff8a4f;
+}
+
+.container {
+    position: relative;
+    margin-top: 0px;
+    padding: 0;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+.header {
+    padding: 10px;
+    display: flex;
+    background-color: #fff;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: black;
+}
+.header .icon {
+    width: 15px;
+    height: 1.5rem;
+    object-fit: contain;
+}
+.header-option {
+    padding-right: 5px;
+    padding-left: 5px;
+    border-right: solid 1px gray;
+    color: lightgray;
+    cursor: pointer;
+}
+.header-option.selected {
+    color: black;
+}
+.no-border {
+    border: none;
+}
+
+.multi-step-form {
+    margin-bottom: 20px;
+    padding: 3rem;
+}
+
+
+
+.steps {
+    padding: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .multi-step-form {
+        padding: 1rem;
+    }
+
+    .header {
+        display: block;
+    }
+}

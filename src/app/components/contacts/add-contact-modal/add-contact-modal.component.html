@@ -1,0 +1,140 @@
+<div class="modal-header" style="background-color: #ff8a4f">
+  <h4 class="modal-title text-white pull-left">Add Contact</h4>
+  <button
+    type="button"
+    class="close pull-right text-white"
+    aria-label="Close"
+    (click)="close()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div *ngIf="allowSelection" class="form-group row create-profile-tel-input">
+    <div class="col-12">
+      <button
+        class="btn btn-primary dropdown-toggle w-100"
+        (click)="expand = !expand"
+      >
+        Choose Existing Contact <span class="caret"></span>
+      </button>
+
+      <div *ngIf="expand" class="dropdown-menu">
+        <input
+          required
+          type="text"
+          placeholder="Search.."
+          class="form-control"
+          (input)="onSearchChange($event.target.value)"
+        />
+        <ul class="contact-options">
+          <li *ngFor="let contact of filteredContacts">
+            <div
+              class="dropdown-item d-flex"
+              (click)="onContactSelected(contact)"
+            >
+              <div class="w-50">{{ contact.name }}</div>
+              <div class="w-50">{{ contact.number }}</div>
+            </div>
+          </li>
+
+          <li *ngIf="filteredContacts.length == 0" class="dropdown-item">
+            None
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr *ngIf="allowSelection" />
+
+  <form class="form-horizontal" #form="ngForm">
+    <div *ngIf="!contact.new" class="form-group row">
+      <div class="col-12 text-right">
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="contact = { new: true }"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-3 col-form-label">Name</label>
+      <div class="col-md-9">
+        <input
+          required
+          [(ngModel)]="contact.name"
+          type="text"
+          name="name"
+          #name="ngModel"
+          class="form-control"
+          [disabled]="!contact.new"
+        />
+        <div class="text-danger sm" [hidden]="name.valid || name.pristine">
+          Name is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row create-profile-tel-input">
+      <label class="col-md-3 col-form-label">Number</label>
+      <div class="col-md-9">
+        <intl-tel-input
+          *ngIf="contact.new"
+          [name]="'number'"
+          [cssClass]="'form-control'"
+          (keyup)="validateContact()"
+          [options]="{ preferredCountries: ['us'], autoPlaceholder: 'off' }"
+          [onlyLocalized]="false"
+          [(E164PhoneNumber)]="contact.number"
+        >
+        </intl-tel-input>
+
+        <input
+          *ngIf="!contact.new"
+          [(ngModel)]="contact.number"
+          type="text"
+          name="number"
+          class="form-control"
+          [disabled]="!contact.new"
+        />
+        <div class="text-danger sm" [hidden]="contact.valid">
+          This number has already been added
+        </div>
+      </div>
+    </div>
+
+    <!--
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Email</label>
+            <div class="col-md-9">
+                <input [(ngModel)]="contact.email" type="email" name="email" #email="ngModel" class="form-control">
+                <div class="text-danger sm" [hidden]="email.valid || email.pristine">Email is required</div>
+            </div>
+        </div>
+-->
+    <alert type="danger" *ngIf="error">
+      <strong>{{ error }}</strong>
+    </alert>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button
+    *ngIf="!loading"
+    class="btn btn-primary"
+    (click)="onContactSubmit()"
+    [disabled]="form.invalid || !contact.valid || !contact.number"
+  >
+    {{ contact.new ? "Save" : "Select" }}
+  </button>
+  <button *ngIf="loading" class="btn btn-primary" disabled="disabled">
+    Loading...
+  </button>
+  <button class="btn btn-default" (click)="close()">Cancel</button>
+</div>

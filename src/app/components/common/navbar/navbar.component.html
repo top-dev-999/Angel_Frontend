@@ -1,0 +1,151 @@
+<div class="site-header sticky-top primary" [ngClass]="isCollapsed ? 'hide-ori-sidebar' : ''" style="background-color: black;">
+    <nav class="navbar-light nav-container navbar navbar-expand-lg mx-auto">
+
+        <a class="navbar-brand nav-pointer nav-logo top-nav-logo" (click)="navTo('')" *ngIf="!isAuthenticated()"></a>
+        
+        <div class="navbar-wrapper">
+            <div class="navbar-toggle">
+                <button type="button" class="navbar-toggler" (click)="sidebarToggle()" style="border: none;">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                </button>
+            </div>
+            
+        </div>
+
+        <!-- <div class="justify-content-end d-flex" *ngIf="!hideMenu">
+            <div class="navbar-toggler-internal">
+                <div class="navbar-toggler">
+                    <div class="hamburger-icon" (click)="isCollapsed = !isCollapsed"
+                        [ngClass]="isCollapsed ? '' : 'open'">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="collapse navbar-collapse justify-content-end" *ngIf="!hideMenu">
+            
+
+            <ul class="navbar-nav" *ngIf="!isAuthenticated()">
+
+                <li class="nav-item">
+                    <a class="nav-link" (click)="navTo('login')" [ngClass]="{'active': route == 'login'}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="navTo('register')"
+                        [ngClass]="{'active': route == 'register'}">Register</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-nav" *ngIf="isAuthenticated()">
+
+                <li class="nav-item dropdown ml-3" dropdown *ngIf="isAdmin()">
+                    <div dropdownToggle class="nav-link" style="background-color: #ff8a4f; border-radius: 5px;">Admin</div>
+
+                    <ul class="dropdown-menu dropdown-menu-right primary" *dropdownMenu>
+
+                        <li class="nav-item ml-3 mr-3">
+                            <a class="nav-link" (click)="navTo('admin/products')"
+                                [ngClass]="{'active': routeContains('products')}">
+                                Products
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item ml-3 mr-3">
+                            <a class="nav-link" (click)="navTo('admin/comms')"
+                                [ngClass]="{'active': routeContains('comms')}">
+                                Comms
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <!-- <li class="nav-item">
+                    <a class="nav-link" (click)="navTo('alarms')" [ngClass]="{'active': routeContains('alarms')}">
+                        Alarm History
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" (click)="navTo('check-ins')" [ngClass]="{'active': routeContains('check-in')}">
+                        Check In History
+                    </a>
+                </li> -->
+
+                <li class="nav-item dropdown ml-3" dropdown>
+
+                    <div dropdownToggle class="profile" style="background-color: #ff8a4f;">{{getInitials()}}</div>
+
+                    <ul class="dropdown-menu dropdown-menu-right primary" *dropdownMenu>
+                        <!-- <li class="nav-item ml-3 mr-3">
+                            <a class="nav-link" (click)="navTo('account')"
+                                [ngClass]="{'active': route == 'account'}">Account</a>
+                        </li> -->
+                        <li class="nav-item ml-3 mr-3">
+                            <a class="nav-link" (click)="onLogoutClick()">Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <div class="ori-sidebar">
+
+        <div *ngIf="!isAuthenticated()" class="mt-4">
+            <div class="nav-item" (click)="navTo('login')" [ngClass]="{'active': route == 'login'}">
+                Login
+            </div>
+
+            <div class="nav-item" (click)="navTo('register')" [ngClass]="{'active': route == 'register'}">
+                Register
+            </div>
+        </div>
+
+        <div *ngIf="isAuthenticated()">
+
+            <div class="mx-auto m-3" *ngIf="isAuthenticated()" (click)="navTo('account')">
+                <div class="profile mx-auto">{{getInitials()}}</div>
+            </div>
+
+            <div *ngIf="isAdmin()" class="nav-item" (click)="navTo('admin/products')"
+                [ngClass]="{'active': routeContains('products')}">
+                Products
+            </div>
+            <div *ngIf="isAdmin()" class="nav-item" (click)="navTo('admin/orders')"
+                [ngClass]="{'active': routeContains('orders')}">
+                Orders
+            </div>
+            <div *ngIf="isAdmin()" class="nav-item" (click)="navTo('admin/comms')"
+                [ngClass]="{'active': routeContains('comms')}">
+                Comms
+            </div>
+
+
+            <!-- <div class="nav-item" (click)="navTo('alarms')" [ngClass]="{'active': routeContains('alarm')}">
+                Alarm History
+            </div>
+
+            <div class="nav-item" (click)="navTo('check-ins')" [ngClass]="{'active': routeContains('check-in')}">
+                Check In History
+            </div> -->
+
+            <div class="nav-item logout" (click)="onLogoutClick()">
+                Log Out
+            </div>
+        </div>
+
+    </div>
+    <div class="ori-sidebar-negative-space" (click)="isCollapsed = true">
+    </div>
+</div>

@@ -1,0 +1,16 @@
+.icon {
+    width: 100%;
+    object-fit: contain;
+}
+
+.icon-holder {
+    border-radius: 4px;
+    position: relative;
+    max-width: 150px;
+    cursor: pointer;
+    background-color: #ff8a4f77;
+}
+
+.icon-holder.selected {
+    background-color: #ff8a4f;
+}

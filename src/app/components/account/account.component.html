@@ -1,0 +1,65 @@
+<div class="standard-div pfb">
+  <div class="container">
+    <h3 class="mt-3 mb-3">Account</h3>
+    <hr />
+    <div class="panel-container mb-3">
+      <div class="card card-container-left">
+        <div class="panel">
+          <div class="d-flex image-container justify-content-center mb-2">
+            <img
+              *ngIf="image && image.data"
+              class="img-upload"
+              [src]="image.data"
+            />
+            <img
+              *ngIf="!image || !image.data"
+              class="img-upload"
+              src="assets/default-user.png"
+            />
+          </div>
+
+          <h6 align="center">{{ profile.name }} {{ profile.surname }}</h6>
+          <hr />
+
+          <div class="tab-options">
+            <div
+              class="tab"
+              (click)="option = 0"
+              [ngClass]="{ selected: option == 0 }"
+            >
+              Manage Account
+            </div>
+
+            <div
+              class="tab"
+              (click)="option = 3"
+              [ngClass]="{ selected: option == 3 }"
+            >
+              Change Password
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-container">
+        <div class="panel">
+          <div class="animate-opacity" *ngIf="option == 0">
+            <app-billing-information></app-billing-information>
+          </div>
+
+          <div class="animate-opacity" *ngIf="option == 1">
+            <app-invoices></app-invoices>
+          </div>
+
+          <div class="animate-opacity" *ngIf="option == 2">
+            <app-subscriptions></app-subscriptions>
+          </div>
+
+          <div class="animate-opacity" *ngIf="option == 3">
+            <app-change-password></app-change-password>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

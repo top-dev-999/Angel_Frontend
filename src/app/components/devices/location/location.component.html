@@ -1,0 +1,45 @@
+<h4>Location:</h4>
+<p>
+  Please capture the location of your unit.
+</p>
+<hr />
+
+<div>
+  <div class="form-group">
+    <div class="col-12">
+      <input
+        placeholder="search for location"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="off"
+        type="text"
+        class="form-control"
+        #search
+      />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-12">
+      <agm-map
+        *ngIf="location"
+        style="height: 30vh;"
+        [longitude]="location.longitude"
+        [latitude]="location.latitude"
+        [zoom]="zoom"
+        [streetViewControl]="false"
+        (mapClick)="onMapMarkerSelected($event)"
+      >
+        <agm-marker
+          [longitude]="location.longitude"
+          [latitude]="location.latitude"
+        ></agm-marker>
+      </agm-map>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button (click)="onSubmit()" class="btn btn-primary">
+      Save
+    </button>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="card card-container">
+  <h5 class="card-header">Profiles</h5>
+  <div class="card-body">
+
+      <div class="spinner-container" *ngIf="profileLoading">
+          <div class="loader center"></div>
+      </div>
+      <div class="display-grid justify-content-center" *ngIf="!profileLoading">
+
+          <div class="item-container primary-hover" *ngFor="let profile of profiles"
+              (click)="navToEditProfile(profile.id)">
+
+              <div class="profile-name">{{profile.name + ' ' + profile.surname}}</div>
+
+          </div>
+
+          <div class="item-container item-add-container" (click)="navToCreateProfile()">
+              <div class="add-icon-container">
+                  <i class="fa fa-plus"></i>
+              </div>
+              <div class="hover-text">
+                  Add Profile
+              </div>
+          </div>
+
+      </div>
+
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="modal-header" style="background-color: #28a745">
+    <h4 class="modal-title text-white pull-left">{{title}}</h4>
+    <button type="button" class="close text-white pull-right" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="col-12 control-label">{{message}}</label>
+        <div class="col-12">
+            <textarea  class="form-control" type="text" [(ngModel)]="text" name="text"></textarea>
+        </div>
+    </div>
+</form>
+
+
+<div class="modal-footer">
+    <button *ngIf="!loading" class="btn btn-success" (click)="onAddClicked()">Add</button>
+    <button *ngIf="loading" class="btn btn-primary" [disabled]="true">Loading...</button>
+    <button type="button" class="btn btn-default" (click)="close()">No</button>
+</div>

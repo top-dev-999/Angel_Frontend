@@ -1,0 +1,50 @@
+<div class="card card-container">
+  <h5 class="card-header">Devices</h5>
+  <div class="card-body">
+
+      <div class="spinner-container" *ngIf="deviceLoading">
+          <div class="loader center"></div>
+      </div>
+      <div class="display-grid justify-content-center" *ngIf="!deviceLoading">
+
+          <div class="item-container primary-hover" *ngFor="let device of devices" (click)="navToEditDevice(device)">
+              <img class="device-img" [src]="getProductImage(device.productId)">
+              <div class="device-text">
+                  {{device.name||'Setup Device'}}
+              </div>
+              <div class="armed-toggle">
+                  <app-toggle [on]="'Armed'" [off]="'Disarmed'" [value]="!device.state || device.state == 'armed'"
+                      (onChange)="onArmedChange($event, device)"></app-toggle>
+              </div>
+          </div>
+
+          <div class="item-container item-add-container" (click)="navToCreateDevice()">
+              <div class="add-icon-container">
+                  <i class="fa fa-plus"></i>
+              </div>
+              <div class="hover-text">
+                  Add Device
+              </div>
+          </div>
+          <ng-template #stateConfirmModal>
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure?</h4>
+                <button type="button" class="close text-white pull-right" aria-label="Close" (click)="close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        
+            <div class="modal-body">
+                <p>Are you sure you want to {{stateToUpdate}} your {{deviceToUpdate.name}}?</p>
+            </div>
+        
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="updateDeviceState()">Yes</button>
+                <button type="button" class="btn btn-default" (click)="close()">No</button>
+            </div>
+        </ng-template>
+
+      </div>
+
+  </div>
+</div>

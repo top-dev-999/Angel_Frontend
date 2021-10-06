@@ -1,0 +1,31 @@
+<div class="container page-boarder">
+
+    <h3 class="mt-3 mb-3">Invoices</h3>
+
+    <div class="table-responsive mt-3 mb-3">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Device</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let invoice of invoices" (click)="navToViewInvoice(invoice.id)" class="pointer">
+                    <td class="p-0"><img class="device-type-img ml-3" [src]="invoice.productImageUrl" /></td>
+                    <td>{{invoice.productType}}</td>
+                    <td>{{invoice.amount}}</td>
+                    <td>{{formatDate(invoice.dateCreated)}}</td>
+                </tr>
+                <tr *ngIf="invoices.length == 0">
+                    <td colspan="3">No invoices</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

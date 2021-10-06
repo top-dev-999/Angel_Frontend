@@ -1,0 +1,37 @@
+.region-details {
+    padding-top: 0px;
+}
+
+th {
+  vertical-align: middle;
+}
+
+td {
+  vertical-align: middle;
+}
+
+@media only screen and (max-width: 800px) {
+    /* For mobile phones: */
+    [class*="col-lg-"] {
+        width: 100%;
+        max-width: 100%;
+    }
+    .flex-regions {
+        display: block;
+    }
+    .region-details {
+        padding-top: 20px;
+    }
+}
+
+.region {
+    padding: 1rem 1rem;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    margin-bottom: 1rem;
+}
+
+.not-synced {
+    background-color: red;
+    color: white;
+}

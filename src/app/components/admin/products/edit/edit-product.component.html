@@ -1,0 +1,137 @@
+<div class="container pfb">
+  <h3>Edit Product:</h3>
+  <hr />
+  <form
+    (submit)="onProductSubmit()"
+    class="form-horizontal mb-2"
+    #form="ngForm"
+  >
+    <div class="form-group">
+      <label class="col-12 control-label">Product Icon</label>
+
+      <input
+        style="display: none"
+        type="file"
+        #fileInput
+        accept=".jpg, .png"
+        ng2FileSelect
+        [uploader]="uploader"
+      />
+
+      <div class="d-flex image-container justify-content-center mb-2">
+        <div *ngIf="product.imagePath" class="image">
+          <img class="img-upload" [src]="product.imagePath" />
+          <div class="image-close-button text-danger" (click)="clearImage()">
+            <i class="fa fa-times"></i>
+          </div>
+        </div>
+        <div *ngIf="image" class="image">
+          <img class="img-upload" [src]="image.image" />
+          <div class="image-close-button text-danger" (click)="clearImage()">
+            <i class="fa fa-times"></i>
+          </div>
+        </div>
+
+        <div
+          *ngIf="!image && !product.imagePath"
+          class="image add-image"
+          title="Add Image"
+          (click)="fileInput.click()"
+        >
+          <i class="fa fa-plus"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-12 control-label">Name</label>
+      <div class="col-12">
+        <input
+          required
+          class="form-control"
+          type="text"
+          [(ngModel)]="product.name"
+          name="name"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-12 control-label">Mode</label>
+      <div class="col-12">
+        <div class="d-flex justify-content-center image-container">
+          <div
+            class="image m-3 p-4 text-center"
+            [ngClass]="{ selected: product.mode == 'gsm' }"
+            (click)="product.mode = 'gsm'"
+          >
+            <img class="icon" src="assets/gsm.png" />
+            <div class="icon-text">GSM</div>
+          </div>
+
+          <div
+            class="image m-3 p-4 text-center"
+            [ngClass]="{ selected: product.mode == 'wifi' }"
+            (click)="product.mode = 'wifi'"
+          >
+            <img class="icon" src="assets/wifi.png" />
+            <div class="icon-text">WIFI</div>
+          </div>
+
+          <div
+            class="image m-3 p-4 text-center"
+            [ngClass]="{ selected: product.mode == 'ring' }"
+            (click)="product.mode = 'ring'"
+          >
+            <img class="icon" src="assets/ring.png" />
+            <div class="icon-text">RINGER</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-12 control-label">Price</label>
+      <div class="col-12">
+        <input
+          required
+          class="form-control"
+          type="number"
+          [(ngModel)]="product.price"
+          name="price"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-12 control-label">Monthly Price</label>
+      <div class="col-12">
+        <input
+          required
+          class="form-control"
+          type="number"
+          [(ngModel)]="product.monthlyPrice"
+          name="monthlyPrice"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-12 control-label">Annual Price</label>
+      <div class="col-12">
+        <input
+          required
+          class="form-control"
+          type="number"
+          [(ngModel)]="product.yearlyPrice"
+          name="yearlyPrice"
+        />
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!form.valid && image"
+    >
+      Update Product
+    </button>
+  </form>
+</div>

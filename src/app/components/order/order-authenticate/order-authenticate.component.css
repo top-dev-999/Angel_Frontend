@@ -1,0 +1,113 @@
+.holder {
+    position: relative;
+    padding-top: 1rem;
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    height: 100px;
+    background-color: #ff8a4f;
+}
+
+.container {
+    position: relative;
+    margin-top: 0px;
+    padding: 0;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+.header {
+    padding: 10px;
+    display: flex;
+    background-color: #fff;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: black;
+}
+.header .icon {
+    width: 15px;
+    height: 1.5rem;
+}
+.header-option {
+    padding-right: 5px;
+    padding-left: 5px;
+    border-right: solid 1px gray;
+    color: lightgray;
+}
+.header-option.selected {
+    color: black;
+}
+.no-border {
+    border: none;
+}
+
+.multi-step-form {
+    margin-bottom: 20px;
+    padding: 3rem;
+}
+
+.icon {
+    width: 100%;
+    object-fit: contain;
+}
+
+.icon-holder {
+    border-radius: 4px;
+    position: relative;
+    max-width: 150px;
+    cursor: pointer;
+    background-color: #ff8a4f77;
+}
+
+.icon-holder.selected {
+    background-color: #ff8a4f;
+}
+
+.auth {
+    display: flex;
+    justify-content: space-between;
+}
+
+.auth .card {
+    width: 50%;
+    margin: 5px;
+}
+
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.step.active {
+    background-color: #ff8a4f;
+}
+
+.steps {
+    padding: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .multi-step-form {
+        padding: 1rem;
+    }
+
+    .header {
+        display: block;
+    }
+    
+    .auth {
+        display: block;
+    }
+    .auth .card {
+        width: 100%;
+    }
+}

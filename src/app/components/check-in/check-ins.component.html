@@ -1,0 +1,32 @@
+<div class="pfb">
+    <div class="card card-container">
+        <h5 class="card-header">Check In History</h5>
+        <div class="card-body">
+
+        <div class="table-responsive mt-3 mb-3">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Device</th>
+                        <th>Triggered By</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let checkIn of checkIns" (click)="navToViewCheckIn(checkIn.id)" class="pointer">
+                        <td class="p-0"><img class="device-type-img ml-3" [src]="getProductImage(checkIn.productId)" /></td>
+                        <td>{{checkIn.deviceName}}</td>
+                        <td>{{getProfileName(checkIn.profileId)}}</td>
+                        <td>{{formatDate(checkIn.createdAt)}}</td>
+                    </tr>
+                    <tr *ngIf="checkIns.length == 0">
+                        <td colspan="3">No Check Ins</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
